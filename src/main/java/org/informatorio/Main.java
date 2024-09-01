@@ -2,10 +2,14 @@ package org.informatorio;
 
 import java.util.Scanner;
 
+import org.informatorio.domain.Organizer;
+
 public class Main {
     public static void main(String[] args) {
 
         System.out.println("===== Gestor de Eventos =====");
+
+        Organizer organizer = new Organizer();
 
         int option;
 
@@ -21,13 +25,14 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    System.out.println("Creando evento");
+                    organizer.createEvent();
                     break;
                 case 2:
                     System.out.println("Agregando participante");
                     break;
                 case 3:
                     System.out.println("Listando eventos");
+                    
                     break;
                 case 4:
                     System.out.println("Saliendo");
