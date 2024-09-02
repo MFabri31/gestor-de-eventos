@@ -3,9 +3,13 @@ package org.informatorio.domain;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 import java.util.List;
+
 import java.util.Scanner;
 import java.util.UUID;
+
+import org.informatorio.enums.CulinaryInterestsEnum;
 
 
 public class Organizer {
@@ -67,5 +71,71 @@ public class Organizer {
 
     }
 
+    public void registerParticipant() {
+    
+        Scanner scann = new Scanner(System.in);
+
+        Participant participant = new Participant();
+
+        System.out.println("--------------------------");
+        System.out.println("Registro de participante");
+
+        System.out.println("Nombre");
+        String name = scann.nextLine();
+        scann.nextLine();
+
+        participant.setName(name);
+
+        System.out.println("Apellido");
+        String lastName = scann.nextLine();
+        scann.nextLine();
+        
+        participant.setLastName(lastName);
+
+        System.out.println("Intereses culinarios");
+
+        System.out.println("[1] Barbacoa");
+        System.out.println("[2] Cocina vegana");
+        System.out.println("[3] Cocina Italiana");
+        System.out.println("[4] Pasteleria Francesa");
+
+
+        int interest = scann.nextInt();
+        scann.nextLine();
+
+        switch (interest) {
+            case 1:
+                participant.setCulinaryInterests(CulinaryInterestsEnum.MEXICAN_CUISINE);
+                break;
+            case 2:
+                participant.setCulinaryInterests(CulinaryInterestsEnum.BARBECUE);
+                break;
+            case 3:
+                participant.setCulinaryInterests(CulinaryInterestsEnum.FRENCH_PASTRY);
+                break;
+            case 4:
+                participant.setCulinaryInterests(CulinaryInterestsEnum.ITALIAN_CUISINE);
+                break;
+            default:
+                break;
+        }
+
+        System.out.println("Evento a asistir");
+
+        String eventName = scann.nextLine();
+        scann.nextLine();
+
+        for (Event event : events) {
+            if(event.getName().equals(eventName)){
+                event.addParticipant(participant);
+                participant.setEvents(event);
+            }else{
+                System.out.println("El evento no existe.");
+                return;
+            }
+        }
+
+        System.out.println("Participante registrado exitosamente!");
+    }
 
 }

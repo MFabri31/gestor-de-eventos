@@ -1,6 +1,8 @@
 package org.informatorio.domain;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Event {
@@ -11,6 +13,7 @@ public class Event {
     private LocalDate date;
     private String Location;
     private Integer capacity;
+    private List<Participant> participants = new ArrayList();
 
     public UUID getId() {
         return id;
@@ -60,5 +63,14 @@ public class Event {
     public Integer getCapacity() {
         return capacity;
     }
-    
+
+    public int getTotalParticipants() {
+        return this.participants.size();
+    }
+
+
+    public void addParticipant(Participant participant) {
+        participants.add(participant);
+    }
+
 }

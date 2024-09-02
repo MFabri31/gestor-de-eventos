@@ -28,7 +28,7 @@ public class Main {
                     organizer.createEvent();
                     break;
                 case 2:
-                    System.out.println("Agregando participante");
+                    organizer.registerParticipant();
                     break;
                 case 3:
                     System.out.println("Listando eventos");
