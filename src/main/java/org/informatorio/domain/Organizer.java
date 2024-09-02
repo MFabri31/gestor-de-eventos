@@ -50,6 +50,7 @@ public class Organizer {
 
         event.setDate(dateFormatted);
 
+
         System.out.println("Ubicación");
 
         String location = scann.nextLine();
@@ -138,4 +139,51 @@ public class Organizer {
         System.out.println("Participante registrado exitosamente!");
     }
 
+
+
+
+public void showEvents() {
+        
+    if(events.size() > 0){
+    
+        Scanner scann = new Scanner(System.in);
+        
+        System.out.println("==============================");
+        System.out.println("Ingrese una fecha (yyyy-mm-dd).");
+        System.out.println("==============================");
+    
+        String date = scann.nextLine();
+        
+    
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateFormatted = LocalDate.parse(date, formatter);
+        
+        System.out.println("====================");
+        System.out.println("Eventos disponibles.");
+        System.out.println("====================");
+        
+        for (Event event : events) {
+            if(event.getDate().isEqual(dateFormatted)){
+                System.out.println("Nombre: " + event.getName());
+                System.out.println("Descripción: " + event.getDescription());
+                System.out.println("Fecha: " + event.getDate());
+                System.out.println("Ubicación: " + event.getLocation());
+                System.out.println("Capacidad: " + event.getCapacity());
+                System.out.println("Total de participantes: " + event.getTotalParticipants());
+                System.out.println("----------------------------------------");
+              
+            }else{
+                System.out.println("===============================");
+                System.out.println("No hay eventos para esa fecha.");
+                System.out.println("===============================");
+                return;   
+            }
+        }
+    }else{
+        System.out.println("===========================");
+        System.out.println("No hay eventos disponibles.");
+        System.out.println("===========================");
+    }
+
+    }
 }

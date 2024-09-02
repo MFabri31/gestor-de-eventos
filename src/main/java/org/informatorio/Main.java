@@ -14,7 +14,7 @@ public class Main {
         int option;
 
         Scanner scann = new Scanner(System.in);
-
+        
         do {
             System.out.println("[1] Crear evento");
             System.out.println("[2] Agregar participante");
@@ -31,8 +31,7 @@ public class Main {
                     organizer.registerParticipant();
                     break;
                 case 3:
-                    System.out.println("Listando eventos");
-                    
+                    organizer.showEvents();
                     break;
                 case 4:
                     System.out.println("Saliendo");
