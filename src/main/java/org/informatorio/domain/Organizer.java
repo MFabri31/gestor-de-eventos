@@ -11,9 +11,8 @@ import java.util.UUID;
 
 import org.informatorio.enums.CulinaryInterestsEnum;
 
-
 public class Organizer {
-    
+
     private List<Event> events = new ArrayList();
 
     public Event createEvent() {
@@ -39,7 +38,6 @@ public class Organizer {
         scann.nextLine();
         event.setDescription(description);
 
-
         System.out.println("Fecha");
 
         String date = scann.nextLine();
@@ -50,13 +48,11 @@ public class Organizer {
 
         event.setDate(dateFormatted);
 
-
         System.out.println("Ubicación");
 
         String location = scann.nextLine();
         scann.nextLine();
         event.setLocation(location);
-
 
         System.out.println("Capacidad");
 
@@ -73,7 +69,7 @@ public class Organizer {
     }
 
     public void registerParticipant() {
-    
+
         Scanner scann = new Scanner(System.in);
 
         Participant participant = new Participant();
@@ -90,7 +86,7 @@ public class Organizer {
         System.out.println("Apellido");
         String lastName = scann.nextLine();
         scann.nextLine();
-        
+
         participant.setLastName(lastName);
 
         System.out.println("Intereses culinarios");
@@ -99,7 +95,6 @@ public class Organizer {
         System.out.println("[2] Cocina vegana");
         System.out.println("[3] Cocina Italiana");
         System.out.println("[4] Pasteleria Francesa");
-
 
         int interest = scann.nextInt();
         scann.nextLine();
@@ -127,10 +122,10 @@ public class Organizer {
         scann.nextLine();
 
         for (Event event : events) {
-            if(event.getName().equals(eventName)){
+            if (event.getName().equals(eventName)) {
                 event.addParticipant(participant);
                 participant.setEvents(event);
-            }else{
+            } else {
                 System.out.println("El evento no existe.");
                 return;
             }
@@ -139,51 +134,90 @@ public class Organizer {
         System.out.println("Participante registrado exitosamente!");
     }
 
+    public void showEvents() {
 
+        if (events.size() > 0) {
 
+            Scanner scann = new Scanner(System.in);
 
-public void showEvents() {
-        
-    if(events.size() > 0){
-    
-        Scanner scann = new Scanner(System.in);
-        
-        System.out.println("==============================");
-        System.out.println("Ingrese una fecha (yyyy-mm-dd).");
-        System.out.println("==============================");
-    
-        String date = scann.nextLine();
-        
-    
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dateFormatted = LocalDate.parse(date, formatter);
-        
-        System.out.println("====================");
-        System.out.println("Eventos disponibles.");
-        System.out.println("====================");
-        
-        for (Event event : events) {
-            if(event.getDate().isEqual(dateFormatted)){
-                System.out.println("Nombre: " + event.getName());
-                System.out.println("Descripción: " + event.getDescription());
-                System.out.println("Fecha: " + event.getDate());
-                System.out.println("Ubicación: " + event.getLocation());
-                System.out.println("Capacidad: " + event.getCapacity());
-                System.out.println("Total de participantes: " + event.getTotalParticipants());
-                System.out.println("----------------------------------------");
-              
-            }else{
-                System.out.println("===============================");
-                System.out.println("No hay eventos para esa fecha.");
-                System.out.println("===============================");
-                return;   
+            System.out.println("==============================");
+            System.out.println("Ingrese una fecha (yyyy-mm-dd).");
+            System.out.println("==============================");
+
+            String date = scann.nextLine();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate dateFormatted = LocalDate.parse(date, formatter);
+
+            System.out.println("====================");
+            System.out.println("Eventos disponibles.");
+            System.out.println("====================");
+
+            for (Event event : events) {
+                if (event.getDate().isEqual(dateFormatted)) {
+                    System.out.println("Nombre: " + event.getName());
+                    System.out.println("Descripción: " + event.getDescription());
+                    System.out.println("Fecha: " + event.getDate());
+                    System.out.println("Ubicación: " + event.getLocation());
+                    System.out.println("Capacidad: " + event.getCapacity());
+                    System.out.println("Total de participantes: " + event.getTotalParticipants());
+                    System.out.println("Chef: " + event.getChef());
+                    System.out.println("----------------------------------------");
+
+                } else {
+                    System.out.println("===============================");
+                    System.out.println("No hay eventos para esa fecha.");
+                    System.out.println("===============================");
+                    return;
+                }
             }
+        } else {
+            System.out.println("===========================");
+            System.out.println("No hay eventos disponibles.");
+            System.out.println("===========================");
+
         }
-    }else{
-        System.out.println("===========================");
-        System.out.println("No hay eventos disponibles.");
-        System.out.println("===========================");
-    }
 
     }
+
+    public void assignChefToEvent() {
+
+        if (events.size() > 0) {
+
+            Chef chef = new Chef();
+
+            Scanner scann = new Scanner(System.in);
+            System.out.println("Nombre del chef:");
+            String chefName = scann.nextLine();
+
+            chef.setName(chefName);
+
+            System.out.println("Especialidad:");
+            String specialityName = scann.nextLine();
+
+            chef.setSpecialty(specialityName);
+
+            System.out.println("Asignar al evento");
+            String eventName = scann.nextLine();
+
+            for (Event event : events) {
+                if (event.getName().equals(eventName)) {
+                    event.setChef(chef);
+                    chef.setEvents(event);
+                    System.out.println("Chef agregado al evento" + event.getName());
+                } else {
+                    System.out.println("El evento no existe.");
+                    return;
+                }
+            }
+
+        } else {
+            System.out.println("===========================");
+            System.out.println("No hay eventos disponibles.");
+            System.out.println("===========================");
+
+        }
+
+    }
+
 }

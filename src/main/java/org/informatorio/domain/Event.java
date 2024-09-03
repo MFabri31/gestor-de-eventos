@@ -14,6 +14,7 @@ public class Event {
     private String Location;
     private Integer capacity;
     private List<Participant> participants = new ArrayList();
+    private Chef chef;
 
     public UUID getId() {
         return id;
@@ -71,6 +72,14 @@ public class Event {
 
     public void addParticipant(Participant participant) {
         participants.add(participant);
+    }
+
+    public String getChef() {
+        return chef.getName();
+    }
+
+    public void setChef(Chef chef) {
+        this.chef = chef;
     }
 
 }

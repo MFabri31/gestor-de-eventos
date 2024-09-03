@@ -14,12 +14,13 @@ public class Main {
         int option;
 
         Scanner scann = new Scanner(System.in);
-        
+
         do {
             System.out.println("[1] Crear evento");
             System.out.println("[2] Agregar participante");
             System.out.println("[3] Listar eventos");
-            System.out.println("[4] Salir");
+            System.out.println("[4] Asginar chef a evento");
+            System.out.println("[5] Salir");
 
             option = scann.nextInt();
 
@@ -34,6 +35,9 @@ public class Main {
                     organizer.showEvents();
                     break;
                 case 4:
+                    organizer.assignChefToEvent();;
+                    break;
+                case 5:
                     System.out.println("Saliendo");
                     break;
 
@@ -42,7 +46,7 @@ public class Main {
                     break;
             }
 
-        } while (option != 4);
+        } while (option != 5);
 
         scann.close();
     }
